@@ -11,6 +11,10 @@ import LoginBar from './components/login/LoginBar';
 import GradeSelector from './components/grade-selector/GradeSelector';
 import QuizCreate from './components/quiz/CreateQuiz';
 import Create from './components/quiz/manage/Create';
+import StudentView from './components/screen-mode/StudentView';
+import TeacherView from './components/screen-mode/TeacherView';
+import logo from '../src/images/eduIndia_logo.png';
+import './App.css'
 
 const API_KEY = 'AIzaSyC7OfeCVQd89PuG2GiASKAzQEuD-4wQ5zE'; // 'AIzaSyDKjRPdaV2oKrhB1xN0fHY5F35TEV33EKk';
 class App extends Component {
@@ -20,19 +24,29 @@ class App extends Component {
     this.state = {
       videos: [],
       selectedVideo: null,
-      createQuiz : false
+      student: false,  //student or teacher
+      teacher: true
     }
 
-    this.videoSearch('Class 1 English');
+    //this.videoSearch('Class 1 English');
   }
 
-  videoSearch(term) {
-      YTSearch({key: API_KEY, term: term}, videos => {
-      this.setState({
-        videos: videos,
-        selectedVideo: videos[0]
-      });
-    });
+  // videoSearch(term) {
+  //     YTSearch({key: API_KEY, term: term}, videos => {
+  //     this.setState({
+  //       videos: videos,
+  //       selectedVideo: videos[0],
+  //     });
+  //   });
+  // }
+  onStudentChanged() {
+    this.setState({student: true});
+    this.setState({teacher: false});
+  }
+
+  onTeacherChanged() {
+    this.setState({student: false});
+    this.setState({teacher: true});
   }
 
   render() {
@@ -40,40 +54,34 @@ class App extends Component {
     const vidSearch = _.debounce((term) => {this.videoSearch(term)}, 500);
 
     return (
-
       <div>
-        <div className="row">
-          <LoginBar/>
+        <div>
+          <label style={{height:'60px'}}>
+              <div style={{maxWidth:'45rem'}} >
+                <label style={{ textAlign: 'top' , marginLeft:'0.2rem'}}>
+                  <span style={{marginLeft:'5rem'}}>Student</span> 
+                  <input type='radio' checked={this.state.student} onChange={event => this.onStudentChanged()}/>
+                  <span style={{marginLeft:'3rem'}}>Teacher</span> 
+                  <input type='radio' checked={this.state.teacher} onChange={event => this.onTeacherChanged()}/>
+                  <LoginBar/>
+                  <img style={{marginTop:'-13rem', marginLeft:'-2rem', height:'60px', width:'50px'}} src={logo} />
+ 
+                </label>
+                
+              </div>
+          </label>
         </div>
         <div className="row radio-buttons">
           <GradeSelector/>
         </div>
-        <div className="row">
-          <SearchBar onSearchTermChange={vidSearch}/>
-        </div>
-        <div className="row">
-          <div>
-            {/* <VideoDetail video={this.state.selectedVideo} /> */}
-            <iframe width='100%' height='400px'
-            src="https://www.youtube.com/embed/vqpN-5HpmkQ">
-              </iframe>
-          </div>
-          <div>
-            <QuizApp/>
-          </div>
-        </div>
-        <div className="row">
-          {/* <div class="col-sm-3 quizlist" >
-            <Create/>
-          </div> */}
-          {/* <div class="col-sm-3 tubelist" >
-              <VideoList 
-              onVideoSelect={selectedVideo => this.setState({selectedVideo: selectedVideo})}
-              videos={this.state.videos}
-             />
-          </div> */}
-        </div>
-
+        { (this.state.student) ?
+          <div className="row">
+            <StudentView/>
+          </div> : (this.state.teacher) ?
+          <div className="row">
+            <TeacherView/>
+          </div> : <span>No View</span>
+        }
       </div>
     );
   }

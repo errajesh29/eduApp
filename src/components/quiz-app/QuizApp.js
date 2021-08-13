@@ -55,8 +55,6 @@ class QuizApp extends Component {
 							<button className='button-quiz' onClick={() => this.onTryAgain()}>Try Again</button>
 						</div>
 						<div>
-						</div>
-						<div>
 							{questions.map((question, i) => (
 							<div>
 								<div className='review-section'>

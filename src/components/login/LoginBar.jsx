@@ -30,11 +30,8 @@ export default class LoginBar extends Component {
 
   render() {
     return (
-      <div style={{display: 'inline',color:'black', justifyContent: 'space-evenly'}}>
-        <div>
-            <img style={{height:'60px', width:'50px'}} src={logo} />
-        </div>
-        <div style={{marginLeft: '70px', marginBottom:'3rem',marginTop:'-50px' }}>
+      <div style={{marginLeft:'5rem', marginTop:'1rem'}}>
+        <div style={{marginLeft: '0px', marginBottom:'3rem',marginTop:'0px' }}>
             <input style={{minWidth:'6rem', width:'18%', maxWidth:'10rem', color:'black'}}
                 type='number'
                 placeholder = 'Mobile'

@@ -20,6 +20,8 @@
   } 
 }
 
+.rowC{display:flex; flex-direction:row;}
+
 body{
   background-color:rgb(95, 71, 62);
   padding-left: 2rem;

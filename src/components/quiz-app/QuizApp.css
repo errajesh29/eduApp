@@ -83,11 +83,23 @@ body {
     padding: 5px;
     justify-content: flex-start;
     align-items: center;
-    border: 5px solid #234668;
+    border: 1px solid #234668;
     cursor: pointer;
     margin: 5px;
   }
-  
+  .button-quiz-edit {
+    width: 100%;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #acb2ca;
+    border-radius: 8px;
+    padding: 5px;
+    align-items: center;
+    border: 1px solid #234668;
+    margin: 1px;
+    color:black;
+  }
+
   .correct {
     background-color: #2f922f;
   }
